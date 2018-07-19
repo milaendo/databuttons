@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <h2>Im the nested child with the click event</h2>
     <button @click="onCLick">Click</button>
   </div>
 </template>
@@ -9,7 +10,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      
+
     }
   },
   created() {

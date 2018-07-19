@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Im the parent</h1>
     <router-view/>
   </div>
 </template>
