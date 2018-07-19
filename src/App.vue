@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Im the parent</h1>
-    <hello-world v-bind:data="data"></hello-world>
+    <hello-world v-bind:response="response"></hello-world>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   components: { HelloWorld },
   data() {
     return {
-  "data":[
+  "response":[
      {
         "uid":"7168a8bd-dfc3-48c3-83f5-e696781924ac",
         "parent_role_id":null,

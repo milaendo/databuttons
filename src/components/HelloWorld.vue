@@ -1,17 +1,18 @@
 <template>
   <div class="hello">
     <h2>Im the nested child with the click event</h2>
-    <button @click="onCLick">Click</button>
     <table class="table table-hover">
   <thead>
     <tr>
+      <th scope="col">UID</th>
       <th scope="col">code</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
     </tr>
   </thead>
-  <tbody v-for="item,index in data">
-    <tr>
+  <tbody v-for="(item,index) in response">
+    <tr @click="onClick(index)">
+      <td>{{item.uid}}</td>
       <td>{{item.name}}</td>
       <td>{{item.code}}</td>
       <td>{{item.description}}</td>
@@ -49,19 +50,19 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: ['data'],
+  props: ['response'],
   data () {
     return {
       show: true,
+
     }
   },
   created() {
     console.log('nested child: this one needs the click event')
   },
   methods: {
-    onCLick() {
-      this.showModal()
-      console.log('title', this.data)
+    onClick(index) {
+      console.log("I was clicked by:", index, this.response[index].name)
     },
     showModal () {
       this.$refs.myModalRef.show()
