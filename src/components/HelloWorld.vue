@@ -2,48 +2,29 @@
   <div class="hello">
     <h2>Im the nested child with the click event</h2>
     <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">UID</th>
-      <th scope="col">code</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody v-for="(item,index) in response">
-    <tr @click="onClick(index)">
-      <td>{{item.uid}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.code}}</td>
-      <td>{{item.description}}</td>
-    </tr>
-  </tbody>
-</table>
-    <!-- <b-modal ref="myModalRef" hide-footer title="Using Component Methods">
+    <thead>
+      <tr>
+        <th scope="col">UID</th>
+        <th scope="col">code</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody v-for="(item,index) in response">
+      <tr @click="onClick(index)">
+        <td>{{item.uid}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.code}}</td>
+        <td>{{item.description}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <b-modal v-if="shown" ref="myModalRef" hide-footer title="Using Component Methods">
     <div class="d-block text-center">
-      <b-form v-if="show">
-      <b-form-group id="exampleInputGroup1"
-                    label=""
-                    label-for="exampleInput1">
-        <b-form-input id="exampleInput1"
-                      type="email"
-                      required
-                      :placeholder="user.name">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group id="exampleInputGroup2"
-                    label=""
-                    label-for="exampleInput2">
-        <b-form-input id="exampleInput2"
-                      type="text"
-                      required
-                      :placeholder="user.code">
-        </b-form-input>
-      </b-form-group>
-    </b-form>
+      <h3>Hello {{userData.name}}</h3>
     </div>
     <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-btn>
-  </b-modal> -->
+  </b-modal>
   </div>
 </template>
 
@@ -53,8 +34,8 @@ export default {
   props: ['response'],
   data () {
     return {
-      show: true,
-
+      shown: false,
+      userData: null
     }
   },
   created() {
@@ -62,10 +43,13 @@ export default {
   },
   methods: {
     onClick(index) {
+      this.showModal(index)
       console.log("I was clicked by:", index, this.response[index].name)
     },
-    showModal () {
+    showModal (index) {
       this.$refs.myModalRef.show()
+      this.userData = JSON.parse(JSON.stringify(this.response[index]));
+      console.log(this.userData)
     },
     hideModal () {
       this.$refs.myModalRef.hide()
