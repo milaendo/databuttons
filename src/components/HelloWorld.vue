@@ -102,7 +102,12 @@ export default {
       this.status = ''
     },
     saveForm(curIndex) {
-      console.log("im Saved", this.response[this.curIndex])
+      this.response[this.curIndex].name = this.name
+      this.response[this.curIndex].code = this.code
+      this.response[this.curIndex].description = this.description
+      this.response[this.curIndex].uid = this.uid
+      this.response[this.curIndex].status = this.status
+      this.hideModal ()
     }
   }
 }
