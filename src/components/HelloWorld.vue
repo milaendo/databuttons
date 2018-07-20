@@ -19,11 +19,47 @@
       </tr>
     </tbody>
   </table>
-  <b-modal v-if="shown" ref="myModalRef" hide-footer title="Using Component Methods">
+  <b-modal ref="myModalRef" hide-footer title="Using Component Methods">
     <div class="d-block text-center">
-      <h3>Hello {{userData.name}}</h3>
-    </div>
-    <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-btn>
+      <b-form-group id="exampleInputGroup1"
+                    label="Code"
+                    label-for="exampleInput1">
+      <b-form-input id="exampleInput1"
+                    type="email"
+                    v-model="code"
+                    required>
+      </b-form-input>
+      </b-form-group>
+      <b-form-group id="exampleInputGroup2"
+                  label="Name"
+                  label-for="exampleInput2">
+      <b-form-input id="exampleInput2"
+                    type="text"
+                    v-model="name"
+                    required>
+      </b-form-input>
+      </b-form-group>
+      <b-form-group id="exampleInputGroup1"
+                    label="description"
+                    label-for="exampleInput1">
+      <b-form-input id="exampleInput1"
+                    type="email"
+                    v-model="description"
+                    required>
+      </b-form-input>
+      </b-form-group>
+      <b-form-group id="exampleInputGroup2"
+                  label="Status"
+                  label-for="exampleInput2">
+      <b-form-input id="exampleInput2"
+                    type="text"
+                    v-model="status"
+                    required>
+      </b-form-input>
+      </b-form-group>
+      <b-button @click="hideModal" type="reset" variant="danger">Cancel</b-button>
+      <b-button @click="saveForm" type="submit" variant="primary">Submit</b-button>
+      </div>
   </b-modal>
   </div>
 </template>
@@ -34,8 +70,12 @@ export default {
   props: ['response'],
   data () {
     return {
-      shown: false,
-      userData: null
+      name: '',
+      code: '',
+      description: '',
+      uid: '',
+      status: '',
+      curIndex: '',
     }
   },
   created() {
@@ -43,16 +83,26 @@ export default {
   },
   methods: {
     onClick(index) {
-      this.showModal(index)
-      console.log("I was clicked by:", index, this.response[index].name)
-    },
-    showModal (index) {
+      this.name = this.response[index].name;
+      this.code = this.response[index].code;
+      this.status = this.response[index].status;
+      this.description = this.response[index].description;
+      this.uid = this.response[index].uid;
+      this.curIndex = index;
       this.$refs.myModalRef.show()
-      this.userData = JSON.parse(JSON.stringify(this.response[index]));
-      console.log(this.userData)
     },
     hideModal () {
       this.$refs.myModalRef.hide()
+    },
+    clearForm() {
+      this.name = '',
+      this.code = '',
+      this.description = '',
+      this.uid = '',
+      this.status = ''
+    },
+    saveForm(curIndex) {
+      console.log("im Saved", this.response[this.curIndex])
     }
   }
 }
