@@ -8,6 +8,7 @@
         <th scope="col">code</th>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
+        <th scope="col">Status</th>
       </tr>
     </thead>
     <tbody v-for="(item,index) in response">
@@ -16,6 +17,7 @@
         <td>{{item.name}}</td>
         <td>{{item.code}}</td>
         <td>{{item.description}}</td>
+        <td>{{item.status}}</td>
       </tr>
     </tbody>
   </table>
@@ -48,9 +50,9 @@
                     required>
       </b-form-input>
       </b-form-group>
-      <b-form-group id="exampleInputGroup2"
+      <b-form-group id="exampleInputGroup3"
                   label="Status"
-                  label-for="exampleInput2">
+                  label-for="exampleInput3">
       <b-form-input id="exampleInput2"
                     type="text"
                     v-model="status"
@@ -94,7 +96,7 @@ export default {
     hideModal () {
       this.$refs.myModalRef.hide()
     },
-    clearForm() {
+    clearForm(curIndex) {
       this.name = '',
       this.code = '',
       this.description = '',
@@ -107,6 +109,7 @@ export default {
       this.response[this.curIndex].description = this.description
       this.response[this.curIndex].uid = this.uid
       this.response[this.curIndex].status = this.status
+      this.clearForm()
       this.hideModal ()
     }
   }
